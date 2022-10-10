@@ -27,7 +27,9 @@ interface Buttons {
 }
 
 export const Tabs: React.FC = () => {
-  const defaultRoute: string = "/registration";
+  const user = localStorage.getItem("user");
+
+  const defaultRoute: string = user ? "/tracker" : "/registration";
 
   const routes: Routes[] = [
     {

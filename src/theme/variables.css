@@ -1,6 +1,15 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
+@font-face {
+  font-family: AppFont;
+  src: url("../font/VCR_OSD_MONO_1.001.ttf");
+}
+
+:root {
+  --ion-font-family: "AppFont";
+}
+
 /** Ionic CSS Variables **/
 :root {
   --ion-color-primary: #e7e2bf;
@@ -73,14 +82,14 @@ http://ionicframework.com/docs/theming/ */
     --ion-color-primary-contrast-rgb: 0, 0, 0;
     --ion-color-primary-shade: #cbc7a8;
     --ion-color-primary-tint: #e9e5c5;
-  
+
     --ion-color-secondary: #928b61;
     --ion-color-secondary-rgb: 146, 139, 97;
     --ion-color-secondary-contrast: #000000;
     --ion-color-secondary-contrast-rgb: 0, 0, 0;
     --ion-color-secondary-shade: #807a55;
     --ion-color-secondary-tint: #9d9771;
-  
+
     --ion-color-tertiary: #090808;
     --ion-color-tertiary-rgb: 9, 8, 8;
     --ion-color-tertiary-contrast: #ffffff;

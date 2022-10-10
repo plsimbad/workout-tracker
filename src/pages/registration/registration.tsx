@@ -12,16 +12,11 @@ export interface IRegForm {
 }
 
 export const Registration: React.FC = () => {
+  const history = useHistory();
   const moveToApp = () => {
     history.push("/overview");
   };
 
-  const user = localStorage.getItem("user");
-  if (user) {
-    moveToApp();
-  }
-
-  const history = useHistory();
   const [regForm, setRegForm] = useState<IRegForm>({
     email: "",
     name: "",
