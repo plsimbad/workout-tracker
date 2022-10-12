@@ -1,4 +1,4 @@
-import { IonButton, IonIcon, IonSlide, IonSlides } from "@ionic/react";
+import { IonButton, IonIcon } from "@ionic/react";
 import { checkmark } from "ionicons/icons";
 import { useState } from "react";
 import { useHistory } from "react-router";
@@ -11,11 +11,40 @@ export interface IRegForm {
   weight: string;
 }
 
+export interface IFormHelper {
+  label: string;
+  type: any;
+  name: string;
+}
+
 export const Registration: React.FC = () => {
   const history = useHistory();
   const moveToApp = () => {
     history.push("/overview");
   };
+
+  const formHelper: IFormHelper[] = [
+    {
+      label: "Email",
+      type: "email",
+      name: "email",
+    },
+    {
+      label: "Name",
+      type: "text",
+      name: "name",
+    },
+    {
+      label: "Height",
+      type: "number",
+      name: "height",
+    },
+    {
+      label: "Weight",
+      type: "number",
+      name: "weight",
+    },
+  ];
 
   const [regForm, setRegForm] = useState<IRegForm>({
     email: "",
@@ -24,72 +53,28 @@ export const Registration: React.FC = () => {
     weight: "",
   });
 
-  const slideOpts = {
-    initialSlide: 0,
-    speed: 400,
+  const handleChange = (value: string, name: string) => {
+    setRegForm((values) => ({ ...values, [name]: value }));
   };
 
-  const setValue = (value: string, field: keyof IRegForm): void => {
-    regForm[field] = value;
-    setRegForm({ ...regForm });
-  };
-
-  const register = () => {
+  const register = (event: any) => {
+    event.preventDefault();
     localStorage.setItem("user", JSON.stringify(regForm));
     moveToApp();
   };
 
   return (
-    <IonSlides pager={true} options={slideOpts} className="h-full">
-      <IonSlide>
-        <RegistrationInput
-          {...{
-            label: "E-Mail",
-            value: regForm.email,
-            field: "email",
-          }}
-          setValue={setValue}
-        />
-      </IonSlide>
-      <IonSlide>
-        <RegistrationInput
-          {...{
-            label: "Name",
-            value: regForm.name,
-            field: "name",
-          }}
-          setValue={setValue}
-        />
-      </IonSlide>
-      <IonSlide>
-        <RegistrationInput
-          {...{
-            label: "Height",
-            value: regForm.height,
-            field: "height",
-          }}
-          setValue={setValue}
-        />
-      </IonSlide>
-      <IonSlide>
-        <div className="flex flex-col w-full">
-          <div className="w-full">
-            <RegistrationInput
-              {...{
-                label: "Weight",
-                value: regForm.weight,
-                field: "weight",
-              }}
-              setValue={setValue}
-            />
-          </div>
-          <div className="absolute bottom-8 right-0">
-            <IonButton className="ml-auto" shape="round" onClick={register}>
-              <IonIcon icon={checkmark} />
-            </IonButton>
-          </div>
-        </div>
-      </IonSlide>
-    </IonSlides>
+    <form
+      onSubmit={register}
+      className="h-full flex items-center justify-center gap-y-3 flex-col"
+    >
+      {formHelper.map((x) => (
+        <RegistrationInput {...x} setValue={handleChange} />
+      ))}
+
+      <IonButton className="ml-auto" shape="round" type="submit">
+        <IonIcon icon={checkmark} />
+      </IonButton>
+    </form>
   );
 };

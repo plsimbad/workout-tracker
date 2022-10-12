@@ -1,27 +1,23 @@
-import { IonItem, IonLabel, IonInput } from "@ionic/react";
-import { IRegForm } from "./registration";
+import { IonInput, IonItem, IonLabel } from "@ionic/react";
+import { IFormHelper } from "./registration";
 
-interface IRegInput {
-  label: string;
-  setValue: (value: string, field: keyof IRegForm) => void;
-  field: keyof IRegForm;
-  value: string;
+interface IInput extends IFormHelper {
+  setValue: (value: string, name: string) => void;
 }
 
-export const RegistrationInput: React.FC<IRegInput> = (props: IRegInput) => {
-  const emitValue = (value: string) => {
-    props.setValue(value, props.field);
+export const RegistrationInput: React.FC<IInput> = (props: IInput) => {
+  const emitValue = (value: any) => {
+    props.setValue(value.target.name, props.name);
   };
 
   return (
     <IonItem className="w-full">
       <IonLabel position="floating">{props.label}</IonLabel>
       <IonInput
+        type={props.type}
+        name={props.name}
         debounce={500}
-        value={props.value}
-        onIonInput={(e) => {
-          emitValue(e.target.value as string);
-        }}
+        onIonChange={emitValue}
         required
       />
     </IonItem>
