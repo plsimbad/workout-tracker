@@ -1,10 +1,12 @@
 import {
   IonButton,
   IonContent,
+  IonDatetime,
   IonIcon,
   IonInput,
   IonItem,
-  IonLabel
+  IonLabel,
+  IonPopover,
 } from "@ionic/react";
 import { add, save } from "ionicons/icons";
 import { useState } from "react";
@@ -23,14 +25,31 @@ export const WorkoutTracker: React.FC = () => {
     sets: 0,
     weight: 0,
   };
-  const today: Date = new Date();
+  const [date, setDate] = useState<Date>(new Date());
   const [newExercise, setNewExercise] = useState<IExercise>(defaultExercise);
   const [exercises, setExercises] = useState<IExercise[]>([]);
+
+  let changeDate = (event: CustomEvent) => {
+    setDate(new Date(event.detail.value));
+  };
   return (
     <>
       <IonContent fullscreen={true}>
         <div className="flex justify-between">
-          <div>{today.toLocaleDateString()}</div>
+          <IonButton id="open-datepicker">
+            {date.toLocaleDateString()}
+          </IonButton>
+          <IonPopover trigger="open-datepicker">
+            <IonContent>
+              <IonDatetime
+                presentation="date"
+                value={date.toISOString()}
+                onIonChange={changeDate}
+                showDefaultButtons={true}
+              ></IonDatetime>
+            </IonContent>
+          </IonPopover>
+
           <div>
             <IonButton className="float-right" onClick={() => {}}>
               <IonIcon icon={save} />

@@ -6,6 +6,11 @@ http://ionicframework.com/docs/theming/ */
   src: url("../font/VCR_OSD_MONO_1.001.ttf");
 }
 
+ion-popover {
+  --box-shadow: none;
+  --width: 88%;
+}
+
 :root {
   --ion-font-family: "AppFont";
 }
