@@ -12,7 +12,7 @@ import { Registration } from "../../pages/registration/registration";
 import { WorkoutOverview } from "../../pages/workout-overview/workout-overview";
 import { WorkoutPlan } from "../../pages/workout-plan/workout-plan";
 import { WorkoutTimer } from "../../pages/workout-timer/WorkoutTimer";
-import { WorkoutTracker } from "../../pages/workout-tracker/WorkoutTracker";
+import { WorkoutTracker } from "../../pages/workout-tracker/workou-tracker";
 import { Page, PageHelper } from "../page/page";
 
 interface Routes {
